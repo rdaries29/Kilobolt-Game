@@ -1,6 +1,7 @@
 package kiloboltgame;
 import kiloboltgame.framework.Animation;
 
+//Java Library Imports
 import java.applet.Applet;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.awt.Image;
 
 @SuppressWarnings("serial")
+//Beginning of StartingClass Class
 public class StartingClass extends Applet implements Runnable,KeyListener{
 	
 	private Robot robot;
