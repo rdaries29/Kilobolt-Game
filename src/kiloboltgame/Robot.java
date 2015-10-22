@@ -6,16 +6,17 @@ public class Robot {
 	
 	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
-	final int GROUND =382;
+	//final int GROUND =382;
 	
 	
 	private int centerX = 100; // X co-ordinate of our robot character's center
-	private int centerY = GROUND; // Y co-ordinate of our robot character's center
+	private int centerY = 377; // Y co-ordinate of our robot character's center
 	private boolean jumped = false; //Changes to true if the character is in the air
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean ducked = false;
-	
+	private boolean readyToFire = true;
+
 	private static Background bg1 = StartingClass.getBg1();
 	private static Background bg2 = StartingClass.getBg2();
 	
@@ -23,7 +24,7 @@ public class Robot {
 	
 	
 	private int speedX =0; //Speed at which X coordinate changes
-	private int speedY =1; //Speed at which Y coordinate changes
+	private int speedY =0; //Speed at which Y coordinate changes
 	
 
 	
@@ -47,18 +48,11 @@ public class Robot {
 		
 		//Updates Y Position
 		centerY += speedY;
-		if(centerY + speedY >=GROUND){
-			centerY = GROUND;
-		}
 		
 		//Handles Jumping
 		if(jumped == true){
 			speedY +=1;
-			if(centerY+speedY>=GROUND){
-				centerY = GROUND;
-				speedY = 0;
-				jumped = false;
-			}
+
 		}
 		//Prevents going beyond X coordinate of 0
 		if(centerX +speedX <60){
@@ -115,8 +109,10 @@ public class Robot {
     }
     
     public void shoot(){
-    	Projectile p = new Projectile(centerX+50,centerY-25);
-    	projectiles.add(p);
+    	if(readyToFire){
+	    	Projectile p = new Projectile(centerX+50,centerY-25);
+	    	projectiles.add(p);
+	    }
     }
 
     public int getCenterX() {
@@ -186,5 +182,12 @@ public class Robot {
     public ArrayList getProjectiles(){
     	return projectiles;
     }
+	public boolean isReadyToFire() {
+		return readyToFire;
+	}
+	public void setReadyToFire(boolean readyToFire) {
+		this.readyToFire = readyToFire;
+	}
+    
 
 }

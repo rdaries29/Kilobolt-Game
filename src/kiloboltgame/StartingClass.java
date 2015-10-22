@@ -16,10 +16,9 @@ import java.util.ArrayList;
 import java.awt.Image;
 
 @SuppressWarnings("serial")
-//Beginning of StartingClass Class
 public class StartingClass extends Applet implements Runnable,KeyListener{
 	
-	private Robot robot;
+	private static Robot robot;
 	private Heliboy hb,hb2;
 	private Image image,character,character2,character3,background,characterDown,characterJumped,currentSprite,heliboy,heliboy2,heliboy3,heliboy4,heliboy5;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft, tilegrassRight, tiledirt;
@@ -97,6 +96,7 @@ public class StartingClass extends Applet implements Runnable,KeyListener{
 	public void start() {
 		bg1 = new Background(0,0);
 		bg2 = new Background(2160,0);
+		robot = new Robot();
 		
 		//Intializing Tiles
 		
@@ -296,6 +296,7 @@ public class StartingClass extends Applet implements Runnable,KeyListener{
 		case KeyEvent.VK_CONTROL:
 			if(robot.isDucked() == false && robot.isJumped() == false){
 				robot.shoot();
+				robot.setReadyToFire(false);
 			}
 			break;
 		}
@@ -327,6 +328,9 @@ public class StartingClass extends Applet implements Runnable,KeyListener{
 			
 		case KeyEvent.VK_SPACE:
 			break;
+		case KeyEvent.VK_CONTROL:
+			robot.setReadyToFire(true);
+			break;
 		}
 	}
 
@@ -344,6 +348,16 @@ public class StartingClass extends Applet implements Runnable,KeyListener{
 		return bg2;
 	}
 	
+	
+	
+	public static Robot getRobot() {
+		return robot;
+	}
+
+	public static void setRobot(Robot robot) {
+		StartingClass.robot = robot;
+	}
+
 	public void animate(){
 		anim.update(15);
 		hanim.update(50);
